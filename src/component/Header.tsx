@@ -109,7 +109,6 @@ const HeaderWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   background: #ffffff;
-  z-index: 1000;
   position: fixed;
 `;
 

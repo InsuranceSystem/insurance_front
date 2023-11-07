@@ -10,7 +10,7 @@ import {
   Basic,
   Description2,
   SupportButton
-} from './ModalStyle';
+} from '../Retreive/ModalStyle';
 import scrollbar from '../../assets/scrollBar.svg';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -38,7 +38,7 @@ const ModalBody = styled.div`
     border-radius: 2px; /* Rounded corners for the thumb */
   }
 `;
-const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
+const ContractModal: React.FC<RecruitmentModalProps> = ({
   isOpen,
   onClose,
   selectedInsuranceId
@@ -132,11 +132,18 @@ const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
   if (!isOpen || !insuranceData) {
     return null;
   }
-  const handleSupportClick = () => {
+  const handlePayClick = () => {
     const token = localStorage.getItem('accessToken');
     if (!token) {
     } else {
-      window.location.href = `/application?state=${insuranceData.id}`;
+      window.location.href = `/Pay?state=${insuranceData.id}`;
+    }
+  };
+  const handleClaimClick = () => {
+    const token = localStorage.getItem('accessToken');
+    if (!token) {
+    } else {
+      window.location.href = `/Claim?state=${insuranceData.id}`;
     }
   };
   return (
@@ -181,7 +188,14 @@ const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
               <SubTitle>주의 사항</SubTitle>
               <Content>{insuranceData.precaution}</Content>
             </Description2>
-            <SupportButton onClick={handleSupportClick}>가입하기</SupportButton>
+            <Wrapper>
+              <SupportButton onClick={handleClaimClick}>
+                보상금 청구
+              </SupportButton>
+              <SupportButton onClick={handlePayClick}>
+                보험료 납부
+              </SupportButton>
+            </Wrapper>
           </ModalBody>
         </ModalContent>
       </ModalWrapper>
@@ -189,4 +203,8 @@ const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
   );
 };
 
-export default RecruitmentModal;
+export default ContractModal;
+
+const Wrapper = styled.div`
+  display: flex;
+`;

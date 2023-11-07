@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 export const ModalWrapper = styled.div`
   width: 861px;
-  height: 736px;
+  height: 656px;
   border-radius: 10px;
   background: #fff;
   box-shadow: 0px 4px 20px 10px rgba(0, 0, 0, 0.05);
-  margin-top: 50px;
+  margin-top: 10px;
 `;
 
 export const ModalOverlay = styled.div`

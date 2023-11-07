@@ -188,11 +188,13 @@ const InsuranceList = () => {
 
   useEffect(() => {
     axios
-      .get('api/insurance')
+      .get(
+        'https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurances/all'
+      )
       .then((response) => {
         console.log(response);
-        if (response.data.data) {
-          setInsuranceData(response.data.data);
+        if (response.data) {
+          setInsuranceData(response.data);
         } else {
           console.error('Application list data not available:', response.data);
         }
@@ -259,7 +261,7 @@ const Content = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-left: 330px;
+  margin-left: 130px;
   margin-top: 40px;
 `;
 
