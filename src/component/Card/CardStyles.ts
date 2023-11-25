@@ -91,3 +91,43 @@ export const UpWrapper = styled.div`
   display: flex;
   flex-direction: row;
 `;
+export const commonButtonStyles = `
+  font-family: 'GmarketSansMedium';
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 500;
+  width: 104px;
+  height: 40px;
+  line-height: 41px;
+  border-radius: 15px;
+  background: rgba(0, 47, 213, 0.05);
+  color: #002fd5;
+  border: none;
+  margin-top: 13px;
+  margin-left: 10px;
+
+  &:hover {
+    background-color: #002fd5;
+    color: #ffffff;
+  }
+
+  &:active {
+    color: #002fd5;
+  }
+`;
+
+export const ResultButton = styled.button<{ approval: boolean }>`
+  ${commonButtonStyles}
+  background: ${({ approval }) =>
+    approval ? 'rgba(0, 47, 213, 0.05)' : '#f1f3f5'};
+  color: ${({ approval }) => (approval ? '#002fd5' : '#87888B')};
+  cursor: ${({ approval }) => (approval ? 'pointer' : 'not-allowed')};
+  &:hover {
+    background-color: ${({ approval }) => (approval ? '#002fd5' : '#f1f3f5')};
+    color: ${({ approval }) => (approval ? '#ffffff' : '#87888B')};
+  }
+`;
+
+export const FileButton = styled.button`
+  ${commonButtonStyles}
+`;
