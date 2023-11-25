@@ -10,12 +10,12 @@ import {
   Basic,
   Description2,
   SupportButton
-} from './ModalStyle';
+} from '../../component/Modal/ModalStyle';
 import scrollbar from '../../assets/scrollBar.svg';
 import styled from 'styled-components';
 import axios from 'axios';
-import { InsuranceProps } from '../../component/Insurance/InsuranceProps';
-import { TermsProps } from '../../component/Insurance/TermsProps';
+import { InsuranceProps } from '../../component/Props/InsuranceProps';
+import { TermsProps } from '../../component/Props/TermsProps';
 type RecruitmentModalProps = {
   isOpen: boolean;
   onClose: () => void;
@@ -25,7 +25,7 @@ const ModalBody = styled.div`
   max-height: calc(100vh - 100px);
   overflow-y: auto;
   width: 839px;
-  height: 685px;
+  height: 585px;
   scrollbar-width: none; /* Remove default scrollbar */
   &::-webkit-scrollbar {
     width: 4px; /* Set width of the new custom scrollbar */
@@ -52,83 +52,45 @@ const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
     }
   };
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  // const [insuranceData, setInsuranceData] = useState<InsuranceProps | null>(
-  //   null
-  // );
-  //const [termsData, setTermsData] = useState<TermsProps[]>(
-  //   []);
+  const [insuranceData, setInsuranceData] = useState<InsuranceProps | null>(
+    null
+  );
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  // useEffect(() => {
-  //   axios
-  //     .get(`api/group/${selectedInsuranceId}`)
-  //     .then((response) => {
-  //       if (response.data.data) {
-  //         setInsuranceData(response.data.data);
-  //       } else {
-  //         console.error(response.data.data);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching group data:', error);
-  //     });
-  // }, [selectedInsuranceId]);
-  // useEffect(() => {
-  //   axios
-  //     .get(`api/terms/{id}`)
-  //     .then((response) => {
-  //       if (response.data.data) {
-  //         setTermsData(response.data.data);
-  //       } else {
-  //         console.error(response.data.data);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching group data:', error);
-  //     });
-  // }, [selectedInsuranceId]);
-  const insuranceData: InsuranceProps = {
-    id: '1',
-    insuranceName: '보험상품 1',
-    type: '자동차',
-    maxCompensation: 10000,
-    periodOfInsurance: '1년',
-    paymentCycle: '매월',
-    paymentPeriod: '10년',
-    ageOfTarget: '30-50세',
-    basicPremium: 500,
-    rate: '5%',
-    distributionStatus: true,
-    authorization: true,
-    TermsIDList: '1,2,3',
-    insuranceClausePeriod: '10년',
-    precaution: '주의사항 1'
-  };
-  const termsData: TermsProps[] = [
-    {
-      termsID: '1',
-      termsName: '보험약관1',
-      calculatedMoneyMethod: '합의 지급',
-      termsContent: '자동차 사고로 인한 손해배상'
-    },
-    {
-      termsID: '2',
-      termsName: '보험약관2',
-      calculatedMoneyMethod: '합의 지금',
-      termsContent: '자동차 사고로 인한 손해배상'
-    },
-    {
-      termsID: '3',
-      termsName: '보험약관3',
-      calculatedMoneyMethod: '합의 지급',
-      termsContent: '자동차 사고로 인한 손해배상'
-    },
-    {
-      termsID: '4',
-      termsName: '보험약관4',
-      calculatedMoneyMethod: '합의 지급',
-      termsContent: '자동차 사고로 인한 손해배상'
-    }
-  ];
+  const [termsData, setTermsData] = useState<TermsProps[]>([]);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    axios
+      .get(
+        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurances/${selectedInsuranceId}`
+      )
+      .then((response) => {
+        if (response.data.data) {
+          setInsuranceData(response.data.data);
+        } else {
+          console.error(response.data.data);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching group data:', error);
+      });
+  }, [selectedInsuranceId]);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    axios
+      .get(
+        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurances/${selectedInsuranceId}/terms`
+      )
+      .then((response) => {
+        if (response.data.data) {
+          setTermsData(response.data.data);
+        } else {
+          console.error(response.data.data);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching group data:', error);
+      });
+  }, [selectedInsuranceId]);
   if (!isOpen || !insuranceData) {
     return null;
   }
@@ -147,7 +109,9 @@ const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
             <Title>{insuranceData.insuranceName}</Title>
             <Description2>
               <SubTitle>최대 보장한도</SubTitle>
-              <Basic>{insuranceData.maxCompensation}</Basic>
+              <Basic>
+                {Number(insuranceData.maxCompensation).toLocaleString()}
+              </Basic>
             </Description2>
             <Description2>
               <SubTitle>납입 기간</SubTitle>
@@ -171,7 +135,7 @@ const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
               {termsData.map((terms, index) => (
                 <div key={terms.termsID}>
                   <Basic>
-                    {terms.termsName} | {terms.calculatedMoneyMethod} ·{' '}
+                    {terms.termsName} - {terms.calculatedMoneyMethod} ·{' '}
                     {terms.termsContent}
                   </Basic>
                 </div>

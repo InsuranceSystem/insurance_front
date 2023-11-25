@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import React, { useEffect, useState } from 'react';
-import Sidebar from '../../component/SideBar';
+import InsuranceSideBar from '../../Layouts/InsuranceSideBar';
 import '../../App.css';
 import InsuranceModal from './InsuranceModal';
 import axios from 'axios';
-import InsuranceCard from '../../component/Insurance/InsuranceCard';
-import { InsuranceProps } from '../../component/Insurance/InsuranceProps';
+import InsuranceCard from './InsuranceCard';
+import { InsuranceProps } from '../../component/Props/InsuranceProps';
 
 const InsuranceList = () => {
   const [InsuranceData, setInsuranceData] = useState<InsuranceProps[]>([]);
@@ -193,10 +193,10 @@ const InsuranceList = () => {
       )
       .then((response) => {
         console.log(response);
-        if (response.data) {
-          setInsuranceData(response.data);
+        if (response.data.data) {
+          setInsuranceData(response.data.data);
         } else {
-          console.error('Application list data not available:', response.data);
+          console.error('Apply list data not available:', response.data);
         }
       })
       .catch((error) => {
@@ -214,7 +214,7 @@ const InsuranceList = () => {
     setSelectedInsuranceId(null);
   };
 
-  const filteredClubData: InsuranceProps[] = dummyInsuranceData.filter(
+  const filteredClubData: InsuranceProps[] = InsuranceData.filter(
     (insurance) => {
       const typeMatch = !selectedType || insurance.type === selectedType;
       return typeMatch;
@@ -226,7 +226,7 @@ const InsuranceList = () => {
         <Introduction>
           <h2>카테고리별 상품 조회</h2>
         </Introduction>
-        <Sidebar
+        <InsuranceSideBar
           selectedType={selectedType}
           setSelectedType={setSelectedType}
         />
@@ -255,13 +255,16 @@ export default InsuranceList;
 
 const Wrapper = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Content = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-left: 130px;
+  align-items: center;
+  justify-content: center;
   margin-top: 40px;
 `;
 
@@ -278,6 +281,7 @@ const Introduction = styled.div`
     font-weight: 100;
     line-height: normal;
     margin-bottom: 18px;
+    margin-right: 950px;
   }
 `;
 
@@ -285,14 +289,14 @@ const CardList = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-top: 41px;
-  margin-left: 50px;
+  width: 1220px;
 `;
 
 const CardContainer = styled.div`
   width: 360px;
   height: 160px;
   margin-top: 8px;
-  margin-right: 45px;
+  margin-left: 45px;
   margin-bottom: 30px;
   border-radius: 15px;
   background: rgba(255, 255, 255, 0.5);
