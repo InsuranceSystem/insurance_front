@@ -68,49 +68,6 @@ const DivclText2 = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
 `;
-const Div2 = styled.div`
-  position: absolute;
-  top: calc(50% - 10.5px);
-  left: 0px;
-  letter-spacing: -0.75px;
-  line-height: 15px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  width: 376.14px;
-  height: 21px;
-`;
-const DivclText3 = styled.div`
-  position: relative;
-  width: 232px;
-  height: 19px;
-  overflow: hidden;
-  flex-shrink: 0;
-`;
-const DivclLayoutContent5 = styled.div`
-  width: 232px;
-  display: flex;
-  flex-direction: row;
-  padding: 10.15999984741211px 35.69999694824219px 2px var(--padding-3xs);
-  box-sizing: border-box;
-  align-items: flex-start;
-  justify-content: flex-start;
-`;
-const DivuuidOl = styled.div`
-  position: absolute;
-  height: calc(100% - 106px);
-  width: calc(100% - 704px);
-  top: 53px;
-  right: 423px;
-  bottom: 53px;
-  left: 281px;
-  display: flex;
-  flex-direction: row;
-  padding: 0px 0px 0.8400001525878906px;
-  box-sizing: border-box;
-  align-items: flex-start;
-  justify-content: flex-start;
-`;
 const DivclLayoutContent3 = styled.div`
   position: absolute;
   height: calc(100% - 121px);
@@ -192,6 +149,7 @@ const DivclControlRoot = styled.div`
   position: relative;
   background-color: #fff;
   border-top: 1px solid #dfdfdf;
+  margin-top: 100px;
   box-sizing: border-box;
   width: 100%;
   overflow: hidden;
@@ -214,7 +172,7 @@ const Footer: FunctionComponent = () => {
             <DivclControl1 />
             <DivclLayoutContent3>
               <DivclText>
-                <Div>명지대학교 인문캠퍼스 11기 아웃라이언</Div>
+                <Div>명지대학교 에이쁠조</Div>
               </DivclText>
               <DivuuidOh>
                 <DivclLayoutContent4>
@@ -222,12 +180,12 @@ const Footer: FunctionComponent = () => {
                 </DivclLayoutContent4>
               </DivuuidOh>
               <DivclText2>
-                <Div>강동우 이윤아 김아영 이서현</Div>
+                <Div>배수연 이윤아 최혁 홍향미</Div>
               </DivclText2>
             </DivclLayoutContent3>
             <DivclText4>
               <CopyrightBy>
-                Copyright ⓒ by OUTLION. All rights reserved.
+                Copyright ⓒ by Leeyuna. All rights reserved.
               </CopyrightBy>
             </DivclText4>
           </DivclLayoutContent2>

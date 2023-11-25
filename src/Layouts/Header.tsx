@@ -1,12 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
+import { useAuth } from '../pages/Login/AuthContext';
+import LoginModal from '../pages/Login/LoginModal';
+import Modal from '../component/Modal/Modal';
 const Header = () => {
   const scrollToTop = () => {
     scroll.scrollToTop();
   };
-
+  // const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  // const { user, login, loginError } = useAuth();
+  // const handleEmailChange = (e: {
+  //   target: { value: React.SetStateAction<string> };
+  // }) => {
+  //   setEmail(e.target.value);
+  // };
+  // const handleLogin = async () => {
+  //   try {
+  //     await login(email, password);
+  //     if (localStorage.getItem('accessToken') !== null) {
+  //       closeModal();
+  //     }
+  //   } catch (error) {
+  //     console.log('로그인 에러', loginError);
+  //     console.log('Login error', error);
+  //   }
+  // };
+  // const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setPassword(e.target.value);
+  // };
+  // const modalContent = (
+  //   <LoginModal
+  //     email={email}
+  //     password={password}
+  //     handleEmailChange={handleEmailChange}
+  //     handlePasswordChange={handlePasswordChange}
+  //     loginError={loginError}
+  //     handleLogin={handleLogin}
+  //   />
+  // );
+  // const openModal = () => {
+  //   setIsLoginModalOpen(true);
+  // };
+  //
+  // const closeModal = () => {
+  //   setIsLoginModalOpen(false);
+  // };
   return (
     <HeaderWrapper>
       <HeaderUl>
@@ -29,7 +71,7 @@ const Header = () => {
             <NavLink
               className={({ isActive }) => 'nav-link' + (isActive ? 'a' : '')}
               to='/management'>
-              <ScrollIndex>내 보험 관리</ScrollIndex>
+              <ScrollIndex>내 계약 관리</ScrollIndex>
             </NavLink>
           </li>
           <li>
@@ -51,6 +93,18 @@ const Header = () => {
           </HeaderUser>
         </HeaderLink>
       </HeaderUl>
+      {/*{isLoginModalOpen && (*/}
+      {/*  <Modal*/}
+      {/*    closeModal={closeModal}*/}
+      {/*    width={'30.1875rem'}*/}
+      {/*    height={'fit-content'}*/}
+      {/*    header={'놀명뭐하니 로그인'}*/}
+      {/*    children={modalContent}*/}
+      {/*    description={*/}
+      {/*      '놀명뭐하니는 명지대학교 동아리, 학생 단체, 소모임을 위한 공간이에요.'*/}
+      {/*    }*/}
+      {/*  />*/}
+      {/*)}*/}
       <BorderLine></BorderLine>
     </HeaderWrapper>
   );
@@ -100,22 +154,24 @@ const HeaderWrapper = styled.div`
   a:visited,
   a:hover {
     text-decoration: none;
-    color: black;
   }
   width: 100%;
-  height: 5rem;
+  height: 3.25rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(3.5px);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: #ffffff;
   position: fixed;
+  top: 0;
 `;
 
 const HeaderUl = styled.ul`
   display: flex;
   align-items: center;
   list-style: none;
+  margin-top: 30px;
 `;
 
 const HeaderLeft = styled.div`
@@ -131,10 +187,6 @@ const HeaderLink = styled.div`
   display: flex;
   align-items: center;
 
-  li:first-child {
-    margin-right: 10px;
-  }
-
   .nav-link {
     color: rgba(0, 0, 0, 0.3);
     font-size: 15px;
@@ -142,9 +194,9 @@ const HeaderLink = styled.div`
     font-weight: 500;
     line-height: normal;
   }
-
+  .nav-linka,
   .nav-link:hover {
-    color: #002fd5;
+    color: rgba(0, 47, 213, 0.8);
     font-size: 15px;
     font-style: normal;
     font-weight: 500;
@@ -182,9 +234,10 @@ const Title = styled.div`
 `;
 const BorderLine = styled.hr`
   stroke-width: 2px;
-  width: 1200px;
+  width: 1250px;
   color: #fff;
   border: none;
   border-top: 1px solid #dbdbdf;
-  margin-top: 20px;
+  margin-top: 15px;
+  margin-left: 10 auto;
 `;
