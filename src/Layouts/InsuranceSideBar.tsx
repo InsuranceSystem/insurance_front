@@ -17,7 +17,10 @@ interface SidebarProps {
   setSelectedType: (interest: string | null) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ selectedType, setSelectedType }) => {
+const InsuranceSideBar: React.FC<SidebarProps> = ({
+  selectedType,
+  setSelectedType
+}) => {
   return (
     <SidebarBackground>
       <>
@@ -27,88 +30,88 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedType, setSelectedType }) => {
           <Content>전체</Content>
         </InterestOption>
         <InterestOption
-          onClick={() => setSelectedType('자동차')}
-          active={selectedType === '자동차'}>
+          onClick={() => setSelectedType('Car')}
+          active={selectedType === 'Car'}>
           <Content>
             <Icon src={car}></Icon>
             <Type>자동차</Type>
           </Content>
         </InterestOption>
         <InterestOption
-          onClick={() => setSelectedType('운전자')}
-          active={selectedType === '운전자'}>
+          onClick={() => setSelectedType('Driver')}
+          active={selectedType === 'Driver'}>
           <Content>
             <Icon src={driver}></Icon>
             <Type>운전자</Type>
           </Content>
         </InterestOption>
         <InterestOption
-          onClick={() => setSelectedType('실손')}
-          active={selectedType === '실손'}>
+          onClick={() => setSelectedType('Health')}
+          active={selectedType === 'Health'}>
           <Content>
             <Icon src={silson}></Icon>
             <Type>실손</Type>
           </Content>
         </InterestOption>
         <InterestOption
-          onClick={() => setSelectedType('자녀')}
-          active={selectedType === '자녀'}>
+          onClick={() => setSelectedType('Child')}
+          active={selectedType === 'Child'}>
           <Content>
             <Icon src={kids}></Icon>
             <Type>자녀</Type>
           </Content>
         </InterestOption>
         <InterestOption
-          onClick={() => setSelectedType('건강')}
-          active={selectedType === '건강'}>
+          onClick={() => setSelectedType('Heart')}
+          active={selectedType === 'Heart'}>
           <Content>
             <Icon src={heart}></Icon>
             <Type>건강</Type>
           </Content>
         </InterestOption>
         <InterestOption
-          onClick={() => setSelectedType('유병자')}
-          active={selectedType === '유병자'}>
+          onClick={() => setSelectedType('Life')}
+          active={selectedType === 'Life'}>
           <Content>
             <Icon src={medic}></Icon>
             <Type>유병자</Type>
           </Content>
         </InterestOption>
         <InterestOption
-          onClick={() => setSelectedType('치아')}
-          active={selectedType === '치아'}>
+          onClick={() => setSelectedType('Tooth')}
+          active={selectedType === 'Tooth'}>
           <Content>
             <Icon src={dentist}></Icon>
             <Type>치아</Type>
           </Content>
         </InterestOption>
         <InterestOption
-          onClick={() => setSelectedType('화재')}
-          active={selectedType === '화재'}>
+          onClick={() => setSelectedType('Fire')}
+          active={selectedType === 'Fire'}>
           <Content>
             <Icon src={fire}></Icon>
             <Type>화재</Type>
           </Content>
         </InterestOption>
         <InterestOption
-          onClick={() => setSelectedType('재산')}
-          active={selectedType === '재산'}>
+          onClick={() => setSelectedType('Property')}
+          active={selectedType === 'Property'}>
           <Content>
             <Icon src={house}></Icon>
             <Type>재산</Type>
           </Content>
         </InterestOption>
         <SpecialInterestOption
-          onClick={() => setSelectedType('여행/레저')}
-          active={selectedType === '여행/레저'}>
+          onClick={() => setSelectedType('Leisure')}
+          active={selectedType === 'Leisure'}>
           <Content>
             <Icon src={lesure}></Icon>
             <Type>여행/레저</Type>
           </Content>
         </SpecialInterestOption>
         <InterestOption
-          onClick={() => setSelectedType('펫')}
-          active={selectedType === '펫'}>
+          onClick={() => setSelectedType('Pet')}
+          active={selectedType === 'Pet'}>
           <Content>
             <Icon src={pet}></Icon>
             <Type>펫</Type>
@@ -119,7 +122,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedType, setSelectedType }) => {
   );
 };
 
-export default Sidebar;
+export default InsuranceSideBar;
 
 interface SidebarOptionProps {
   active: boolean;

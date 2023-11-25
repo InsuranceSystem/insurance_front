@@ -2,46 +2,46 @@ import React from 'react';
 import styled from 'styled-components';
 import '../App.css';
 interface SidebarProps {
-  selectedIsMaturity: boolean | false;
-  setSelectedIsMaturity: (maturity: boolean | false) => void;
-  selectedIsCancellation: boolean | false;
-  setSelectedIsCancellation: (cancellation: boolean | false) => void;
+  selectedIsProceeding: boolean | false;
+  setSelectedIsProceeding: (proceeding: boolean | false) => void;
+  selectedIsCompleted: boolean | false;
+  setSelectedIsCompleted: (cancellation: boolean | false) => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
-  selectedIsMaturity,
-  setSelectedIsMaturity,
-  selectedIsCancellation,
-  setSelectedIsCancellation
+  selectedIsProceeding,
+  setSelectedIsProceeding,
+  selectedIsCompleted,
+  setSelectedIsCompleted
 }) => {
   return (
     <SidebarBackground>
       <>
         <InterestOption
           onClick={() => {
-            setSelectedIsMaturity(false);
-            setSelectedIsCancellation(false);
+            setSelectedIsProceeding(false);
+            setSelectedIsCompleted(false);
           }}
           active={
-            selectedIsMaturity === false && selectedIsCancellation === false
+            selectedIsProceeding === false && selectedIsCompleted === false
           }>
           <Content>전체</Content>
         </InterestOption>
         <InterestOption
           onClick={() => {
-            setSelectedIsMaturity(true);
-            setSelectedIsCancellation(false);
+            setSelectedIsProceeding(true);
+            setSelectedIsCompleted(false);
           }}
-          active={selectedIsMaturity === true}>
-          <Content>만기 보험</Content>
+          active={selectedIsProceeding === true}>
+          <Content>처리 중</Content>
         </InterestOption>
         <InterestOption
           onClick={() => {
-            setSelectedIsCancellation(true);
-            setSelectedIsMaturity(false);
+            setSelectedIsCompleted(true);
+            setSelectedIsProceeding(false);
           }}
-          active={selectedIsCancellation === true}>
-          <Content>해지 보험</Content>
+          active={selectedIsCompleted === true}>
+          <Content>처리 완료</Content>
         </InterestOption>
       </>
     </SidebarBackground>
@@ -53,9 +53,6 @@ export default Sidebar;
 interface SidebarOptionProps {
   active: boolean;
 }
-const Type = styled.div`
-  margin-top: 21px;
-`;
 const Icon = styled.img`
   width: 40px;
   height: 40px;
@@ -75,9 +72,9 @@ const SidebarBackground = styled.div`
   border-radius: 10px;
   background: #fff;
   margin-top: 10px;
-  margin-left: 50px;
+  margin-right: 550px;
   padding: 20px;
-  width: 530px;
+  width: 550px;
   height: 70px;
   flex-shrink: 0;
   box-shadow: 0px 4px 30px 3px rgba(42, 114, 255, 0.25);
