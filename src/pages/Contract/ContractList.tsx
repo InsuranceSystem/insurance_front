@@ -1,20 +1,20 @@
 import styled from 'styled-components';
 import React, { useEffect, useState } from 'react';
-import Sidebar2 from '../../component/SideBar2';
+import Sidebar from '../../Layouts/ContractSideBar';
 import '../../App.css';
 import ContractModal from './ContractModal';
-import axios from 'axios';
-import InsuranceCard from '../../component/Insurance/InsuranceCard';
-import { InsuranceProps } from '../../component/Insurance/InsuranceProps';
-import { ContractProps } from '../../component/MyContract/ContractProps';
-import ContractCard from '../../component/MyContract/ContractCard';
+import { ContractProps } from '../../component/Props/ContractProps';
+import ContractCard from './ContractCard';
+import ApplicationCard from './ApplicationCard';
+import { ApplicationProps } from '../../component/Props/ApplicationProps';
 
-const MyContract = () => {
-  const [InsuranceData, setInsuranceData] = useState<InsuranceProps[]>([]);
+const ContractList = () => {
+  const [InsuranceData, setInsuranceData] = useState<ContractProps[]>([]);
   const [selectedIsMaturity, setSelectedIsMaturity] = useState(false);
   const [selectedIsCancellation, setSelectedIsCancellation] = useState(false);
+  const [selectedIsApplication, setSelectedIsApplication] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedInsuranceId, setSelectedInsuranceId] = useState(null);
+  const [selectedContractId, setSelectedContractId] = useState(null);
   const dummyContractData: ContractProps[] = [
     {
       id: '1',
@@ -157,62 +157,162 @@ const MyContract = () => {
       cancellation: false
     }
   ];
+  // useEffect(() => {
+  //   if (selectedIsApplication) {
+  //     axios
+  //       .get('api/insurance')
+  //       .then((response) => {
+  //         console.log(response);
+  //         if (response.data.data) {
+  //           setInsuranceData(response.data.data);
+  //         } else {
+  //           console.error(
+  //             'Apply list data not available:',
+  //             response.data
+  //           );
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.error('Error fetching application history:', error);
+  //       });
+  //   }
+  // }, [selectedIsApplication]);
+  // useEffect(() => {
+  //   axios
+  //     .get('api/insurance')
+  //     .then((response) => {
+  //       console.log(response);
+  //       if (response.data.data) {
+  //         setInsuranceData(response.data.data);
+  //       } else {
+  //         console.error('Apply list data not available:', response.data);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching application history:', error);
+  //     });
+  // }, []);
 
-  useEffect(() => {
-    axios
-      .get('api/insurance')
-      .then((response) => {
-        console.log(response);
-        if (response.data.data) {
-          setInsuranceData(response.data.data);
-        } else {
-          console.error('Application list data not available:', response.data);
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching application history:', error);
-      });
-  }, []);
-
-  const openModal = ({ insuranceId }: { insuranceId: any }) => {
-    setSelectedInsuranceId(insuranceId);
+  const openModal = ({ contractId }: { contractId: any }) => {
+    setSelectedContractId(contractId);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedInsuranceId(null);
+    setSelectedContractId(null);
   };
+  const dummyApplicationData: ApplicationProps[] = [
+    {
+      id: '6',
+      insuranceName: '건강보험A',
+      createdAt: '2022-09-12',
+      insurancePeriod: '2 years',
+      premium: '100',
+      paymentCycle: 'Monthly',
+      maxCompensation: '5,000',
+      subscriptionFilePath: '/path/to/file6',
+      approval: true,
+      reasonOfApproval: 'Approved for pet health coverage'
+    },
+    {
+      id: '7',
+      insuranceName: '자동차보험B',
+      createdAt: '2022-04-30',
+      insurancePeriod: '3 years',
+      premium: '400',
+      paymentCycle: 'Yearly',
+      maxCompensation: '1,000,000',
+      subscriptionFilePath: '/path/to/file7',
+      approval: true,
+      reasonOfApproval: 'Approved with certain terms'
+    },
+    {
+      id: '8',
+      insuranceName: '운전자보험A',
+      createdAt: '2020-12-15',
+      insurancePeriod: '15 years',
+      premium: '1200',
+      paymentCycle: 'Yearly',
+      maxCompensation: '2,000,000',
+      subscriptionFilePath: '/path/to/file8',
+      approval: true,
+      reasonOfApproval: 'Approved for commercial property coverage'
+    },
+    {
+      id: '9',
+      insuranceName: '여행보험A',
+      createdAt: '2023-05-25',
+      insurancePeriod: '1 year',
+      premium: '150',
+      paymentCycle: 'Monthly',
+      maxCompensation: '10,000',
+      subscriptionFilePath: '/path/to/file9',
+      approval: false,
+      reasonOfApproval: 'Not approved due to missing documentation'
+    },
+    {
+      id: '10',
+      insuranceName: '생명보험B',
+      createdAt: '2022-08-08',
+      insurancePeriod: '5 years',
+      premium: '200',
+      paymentCycle: 'Quarterly',
+      maxCompensation: '200,000',
+      subscriptionFilePath: '/path/to/file10',
+      approval: false,
+      reasonOfApproval: 'Not approved due to insufficient information'
+    }
+  ];
+  // const filteredContractData: ContractProps[] = dummyContractData.filter(
+  //   (insurance) => {
+  //     const MaturityMatch =
+  //       !selectedIsMaturity || insurance.maturity === selectedIsMaturity;
+  //     const CancelMatch =
+  //       !selectedIsCancellation ||
+  //       insurance.cancellation === selectedIsCancellation;
+  //     return MaturityMatch && CancelMatch;
+  //   }
+  // );
+  let filteredData: (ContractProps | ApplicationProps)[] = [];
 
-  const filteredContractData: ContractProps[] = dummyContractData.filter(
-    (insurance) => {
+  if (selectedIsApplication) {
+    filteredData = dummyApplicationData;
+  } else {
+    filteredData = dummyContractData.filter((insurance) => {
       const MaturityMatch =
         !selectedIsMaturity || insurance.maturity === selectedIsMaturity;
       const CancelMatch =
         !selectedIsCancellation ||
         insurance.cancellation === selectedIsCancellation;
       return MaturityMatch && CancelMatch;
-    }
-  );
+    });
+  }
   return (
     <Wrapper>
       <Content>
         <Introduction>
-          <h2>내가 가입한 보험</h2>
+          <h2>나의 계약 조회</h2>
         </Introduction>
-        <Sidebar2
+        <Sidebar
           selectedIsMaturity={selectedIsMaturity}
           setSelectedIsMaturity={setSelectedIsMaturity}
           selectedIsCancellation={selectedIsCancellation}
           setSelectedIsCancellation={setSelectedIsCancellation}
+          selectedIsApplication={selectedIsApplication}
+          setSelectedIsApplication={setSelectedIsApplication}
         />
         <CardList>
-          {filteredContractData.map((contract) => {
+          {filteredData.map((data) => {
             return (
               <CardContainer
-                key={contract.id}
-                onClick={() => openModal({ insuranceId: contract.id })}>
-                <ContractCard {...contract} />
+                key={data.id}
+                onClick={() => openModal({ contractId: data.id })}>
+                {selectedIsApplication ? (
+                  <ApplicationCard {...(data as ApplicationProps)} />
+                ) : (
+                  <ContractCard {...(data as ContractProps)} />
+                )}
               </CardContainer>
             );
           })}
@@ -220,24 +320,27 @@ const MyContract = () => {
         <ContractModal
           isOpen={isModalOpen}
           onClose={closeModal}
-          selectedInsuranceId={selectedInsuranceId}
+          selectedContractId={selectedContractId}
         />
       </Content>
     </Wrapper>
   );
 };
 
-export default MyContract;
+export default ContractList;
 
 const Wrapper = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Content = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-left: 130px;
+  align-items: center;
+  justify-content: center;
   margin-top: 40px;
 `;
 
@@ -254,6 +357,7 @@ const Introduction = styled.div`
     font-weight: 100;
     line-height: normal;
     margin-bottom: 18px;
+    margin-right: 1030px;
   }
 `;
 
@@ -261,14 +365,14 @@ const CardList = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-top: 41px;
-  margin-left: 50px;
+  width: 1220px;
 `;
 
 const CardContainer = styled.div`
   width: 360px;
-  height: 170px;
+  height: 190px;
   margin-top: 8px;
-  margin-right: 45px;
+  margin-left: 45px;
   margin-bottom: 30px;
   border-radius: 15px;
   background: rgba(255, 255, 255, 0.5);

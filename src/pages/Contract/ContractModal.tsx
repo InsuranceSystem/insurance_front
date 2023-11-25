@@ -9,23 +9,24 @@ import {
   Content,
   Basic,
   Description2,
-  SupportButton
-} from '../Retreive/ModalStyle';
+  PayButton,
+  ClaimButton
+} from '../../component/Modal/ModalStyle';
 import scrollbar from '../../assets/scrollBar.svg';
 import styled from 'styled-components';
 import axios from 'axios';
-import { InsuranceProps } from '../../component/Insurance/InsuranceProps';
-import { TermsProps } from '../../component/Insurance/TermsProps';
+import { InsuranceProps } from '../../component/Props/InsuranceProps';
+import { TermsProps } from '../../component/Props/TermsProps';
 type RecruitmentModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  selectedInsuranceId: null;
+  selectedContractId: null;
 };
 const ModalBody = styled.div`
   max-height: calc(100vh - 100px);
   overflow-y: auto;
   width: 839px;
-  height: 685px;
+  height: 585px;
   scrollbar-width: none; /* Remove default scrollbar */
   &::-webkit-scrollbar {
     width: 4px; /* Set width of the new custom scrollbar */
@@ -41,7 +42,7 @@ const ModalBody = styled.div`
 const ContractModal: React.FC<RecruitmentModalProps> = ({
   isOpen,
   onClose,
-  selectedInsuranceId
+  selectedContractId
 }) => {
   if (!isOpen) {
     return null;
@@ -189,12 +190,8 @@ const ContractModal: React.FC<RecruitmentModalProps> = ({
               <Content>{insuranceData.precaution}</Content>
             </Description2>
             <Wrapper>
-              <SupportButton onClick={handleClaimClick}>
-                보상금 청구
-              </SupportButton>
-              <SupportButton onClick={handlePayClick}>
-                보험료 납부
-              </SupportButton>
+              <ClaimButton onClick={handleClaimClick}>보상금 청구</ClaimButton>
+              <PayButton onClick={handlePayClick}>보험료 납부</PayButton>
             </Wrapper>
           </ModalBody>
         </ModalContent>
@@ -207,4 +204,5 @@ export default ContractModal;
 
 const Wrapper = styled.div`
   display: flex;
+  flex-direction: row;
 `;
