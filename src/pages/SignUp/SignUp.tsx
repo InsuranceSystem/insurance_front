@@ -11,12 +11,14 @@ import { FamilyHistoryProps } from '../../component/Props/FamilyHistoryProps';
 import SelectRelationship from '../../component/Selector/SelectRelationship';
 import SelectGender from '../../component/Selector/SelectGender';
 import SelectJob from '../../component/Selector/SelectJob';
+import { useNavigate } from 'react-router-dom';
 declare global {
   interface Window {
     daum: any; // Daum 우편번호 서비스 API 객체의 타입 정의
   }
 }
 function SignUp() {
+  const navigate = useNavigate();
   const [containerHeight, setContainerHeight] = useState<string>('59rem');
   const [id, setId] = useState<string>('');
   const [isIdValid, setIsIdValid] = useState(false);
@@ -153,7 +155,7 @@ function SignUp() {
     const formattedBirth = birth ? birth.toISOString().substr(0, 10) : ''; // birth가 null이 아닌 경우에만 변환 작업을 수행하고, null인 경우 빈 문자열을 반환합니다.
 
     const dto = {
-      id: id,
+      loginId: id,
       password: password,
       name: name,
       job: job,
@@ -164,16 +166,13 @@ function SignUp() {
       familyHistoryList: familyHistoryList
     };
     const formData = new FormData();
-    const token = localStorage.getItem('accessToken');
     formData.append(
       'dto',
       new Blob([JSON.stringify(dto)], { type: 'application/json' })
     );
     console.log(dto);
-    alert('This code is executed');
     if (isIdValid) {
       if (password === confirmPassword) {
-        // 비밀번호가 일치하는 경우
         setPasswordsMatch(true);
         if (
           id &&
@@ -187,14 +186,26 @@ function SignUp() {
           informationAgreement
         ) {
           axios
-            .post('api/auth/sign-up', formData)
+            .post(
+              'https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/customers/join',
+              dto, // 직접 JSON 객체를 전달합니다.
+              {
+                headers: {
+                  'Content-Type': 'application/json' // 요청 헤더에 Content-Type 설정
+                }
+              }
+            )
             .then((response) => {
               console.log(response);
-              alert('회원가입 성공');
+              if (response.status === 201) {
+                alert('회원가입 성공');
+                navigate('/');
+              } else {
+                alert('회원가입 실패');
+              }
             })
             .catch((err) => {
               console.log(err);
-              console.log(formData);
               alert('회원가입에 실패하였습니다. 다시 시도해주세요');
             });
         } else {
@@ -213,7 +224,6 @@ function SignUp() {
   >([]);
   const handleAddFamilyHistory = () => {
     const newFamilyHistory: FamilyHistoryProps = {
-      customerId: '',
       diseaseName: '',
       relationship: ''
     };
@@ -824,36 +834,4 @@ const CheckboxText = styled.span`
   font-style: normal;
   line-height: normal;
   margin-left: 0.3rem;
-`;
-
-const SignUpButton = styled.button`
-  width: 6.5rem;
-  height: 2.4375rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.9375rem;
-  background: rgba(0, 143, 213, 0.1);
-  border: none;
-  background-color: #008fd51a;
-  margin-top: 1rem;
-  cursor: pointer;
-
-  color: #008fd5;
-  font-family: Gmarket Sans TTF;
-  font-size: 0.9375rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 0.9625rem;
-
-  &:hover {
-    background-color: #32a9eb;
-    color: white;
-  }
-
-  &:active {
-    background-color: #008fd51a;
-    color: #008fd5;
-  }
 `;
