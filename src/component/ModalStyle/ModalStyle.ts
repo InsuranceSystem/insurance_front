@@ -19,7 +19,8 @@ export const ModalOverlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  z-index: 999;
+  backdrop-filter: blur(4px);
 `;
 
 export const ModalContent = styled.div`
@@ -62,44 +63,6 @@ export const Description2 = styled.div`
   margin-top: 40px;
 `;
 
-export const ActivePeriod = styled.div`
-  border-radius: 5px;
-  background: #fff;
-  box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.05);
-  width: 159px;
-  height: 36px;
-  flex-shrink: 0;
-  color: rgba(0, 0, 0, 0.7);
-  leading-trim: both;
-  text-edge: cap;
-  font-family: 'GmarketSansMedium';
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 36px;
-  text-align: center;
-  margin-left: 30px;
-  margin-top: 10px;
-`;
-
-export const Period = styled.div`
-  border-radius: 5px;
-  background: #fff;
-  box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.05);
-  width: 159px;
-  height: 36px;
-  flex-shrink: 0;
-  color: rgba(0, 0, 0, 0.7);
-  leading-trim: both;
-  text-edge: cap;
-  font-family: 'GmarketSansMedium';
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 36px;
-  text-align: center;
-`;
-
 export const SubTitle = styled.div`
   color: rgba(0, 0, 0, 0.8);
   font-family: 'GmarketSansMedium';
@@ -111,7 +74,17 @@ export const SubTitle = styled.div`
   margin-top: 40px;
   padding-top: 20px;
 `;
-
+export const SubTitle2 = styled.div`
+  color: rgba(0, 0, 0, 0.8);
+  font-family: 'GmarketSansMedium';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-left: 40px;
+  margin-top: 40px;
+  padding-top: 20px;
+`;
 export const Basic = styled.div`
   color: rgba(0, 0, 0, 0.7);
   font-family: 'GmarketSansMedium';
@@ -135,33 +108,6 @@ export const Content = styled.div`
   width: 714px;
   leading-trim: both;
   text-edge: cap;
-`;
-
-export const PeriodContent = styled.div`
-  color: rgba(0, 0, 0, 0.7);
-  font-family: 'GmarketSansMedium';
-  font-size: 12.8px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  margin-left: 15px;
-  margin-top: 12px;
-  width: 50px;
-  leading-trim: both;
-  text-edge: cap;
-`;
-
-export const PeriodWrapper = styled.div`
-  color: rgba(0, 0, 0, 0.7);
-  font-family: 'GmarketSansMedium';
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  margin-left: 30px;
-  margin-top: 10px;
-  display: flex;
-  justify-content: flex-start;
 `;
 
 export const SupportButton = styled.button`
@@ -202,6 +148,55 @@ export const PayButton = styled.button`
   border: none;
   margin-top: 43px;
   margin-bottom: 40px;
+  margin-left: 20px;
+  &:hover {
+    background-color: #002fd5;
+    color: #ffffff;
+  }
+
+  &:active {
+    color: #002fd5;
+  }
+`;
+export const DeleteButton = styled.button`
+  font-family: 'GmarketSansMedium';
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 500;
+  width: 104px;
+  height: 40px;
+  line-height: 41px;
+  border-radius: 15px;
+  background: rgba(0, 47, 213, 0.05);
+  color: #002fd5;
+  border: none;
+  margin-top: 43px;
+  margin-bottom: 40px;
+  margin-left: 20px;
+  &:hover {
+    background-color: #002fd5;
+    color: #ffffff;
+  }
+
+  &:active {
+    color: #002fd5;
+  }
+`;
+export const AddButton = styled.button`
+  font-family: 'GmarketSansMedium';
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 500;
+  width: 104px;
+  height: 40px;
+  line-height: 41px;
+  border-radius: 15px;
+  background: rgba(0, 47, 213, 0.05);
+  color: #002fd5;
+  border: none;
+  margin-top: 43px;
+  margin-bottom: 40px;
+  margin-left: 220px;
   &:hover {
     background-color: #002fd5;
     color: #ffffff;
@@ -225,6 +220,42 @@ export const ClaimButton = styled.button`
   border: none;
   margin-top: 43px;
   margin-left: 286px;
+  margin-bottom: 40px;
+  margin-right: 30px;
+  &:hover {
+    background-color: #002fd5;
+    color: #ffffff;
+  }
+
+  &:active {
+    color: #002fd5;
+  }
+`;
+export const BorderLine = styled.hr`
+  stroke-width: 2px;
+  width: 760px;
+  flex-shrink: 0;
+  margin-left: 36px;
+  margin-right: 8px;
+  color: #dbdbdf;
+  border: none;
+  border-top: 1px solid #dbdbdf;
+  margin-top: 10px;
+`;
+export const SpecialButton = styled.button`
+  font-family: 'GmarketSansMedium';
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 500;
+  width: 104px;
+  height: 40px;
+  line-height: 41px;
+  border-radius: 15px;
+  background: rgba(0, 47, 213, 0.05);
+  color: #002fd5;
+  border: none;
+  margin-top: 43px;
+  margin-left: 346px;
   margin-bottom: 40px;
   margin-right: 30px;
   &:hover {

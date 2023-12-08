@@ -96,7 +96,7 @@ export const commonButtonStyles = `
   font-size: 0.9375rem;
   font-style: normal;
   font-weight: 500;
-  width: 104px;
+  width: 94px;
   height: 40px;
   line-height: 41px;
   border-radius: 15px;

@@ -7,18 +7,10 @@ interface ModalProps {
   width: string;
   height: string;
   header: string;
-  description: string;
   children: React.ReactNode;
 }
 
-const Modal = ({
-  closeModal,
-  width,
-  height,
-  header,
-  children,
-  description
-}: ModalProps) => {
+const Modal = ({ closeModal, width, height, header, children }: ModalProps) => {
   return (
     <ModalOverlay onClick={closeModal}>
       <ModalContent
@@ -26,7 +18,6 @@ const Modal = ({
         width={width}
         height={height}>
         <ModalHeader>{header}</ModalHeader>
-        <ModalDescription>{description}</ModalDescription>
         {children}
         <CloseButton onClick={closeModal}>
           <CloseButtonImg src={close} alt='close ' />
@@ -49,7 +40,7 @@ const ModalOverlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  z-index: 1000;
 `;
 
 const ModalContent = styled.div<{ width: string; height: string }>`
