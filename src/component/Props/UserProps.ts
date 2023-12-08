@@ -1,11 +1,12 @@
 interface UserProps {
-  profileImageUrl: string;
+  id: string;
   name: string;
-  major: string;
-  introduction?: string;
-  nickName?: string;
-  email: string;
-  id: number;
+  job: string;
+  address: string;
+  birth: string;
+  pnumber: string;
+  gender: string;
+  customerRole: string;
 }
 
 export default UserProps;

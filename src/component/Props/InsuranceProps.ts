@@ -4,14 +4,11 @@ export interface InsuranceProps {
   type: string;
   maxCompensation: number;
   periodOfInsurance: string;
-  paymentCycle: string;
-  paymentPeriod: string;
   ageOfTarget: string;
   basicPremium: number;
-  rate: string;
   distributionStatus: boolean;
   authorization: boolean;
-  TermsIDList: string;
   insuranceClausePeriod: string;
+  termsIdList: string;
   precaution: string;
 }

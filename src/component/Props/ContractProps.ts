@@ -5,6 +5,7 @@ export interface ContractProps {
   insurancePeriod: string;
   premium: number;
   paymentCycle: string;
+  paymentPeriod: string;
   maxCompensation: string;
   dateOfSubscription: string;
   dateOfMaturity: string;
