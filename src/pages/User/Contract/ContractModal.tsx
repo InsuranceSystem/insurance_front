@@ -54,9 +54,7 @@ const ContractModal: React.FC<RecruitmentModalProps> = ({
   useEffect(() => {
     if (isOpen) {
       axios
-        .get(
-          `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/contracts/${selectedContractId}/detail`
-        )
+        .get(`/api/contracts/${selectedContractId}/detail`)
         .then((response) => {
           if (response.data.data) {
             setContractData(response.data.data);

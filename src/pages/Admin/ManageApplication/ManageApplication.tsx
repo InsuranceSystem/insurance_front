@@ -13,9 +13,7 @@ const ManageApplication = () => {
   );
   useEffect(() => {
     axios
-      .get(
-        'https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurance-applications'
-      )
+      .get('/api/insurance-applications')
       .then((response) => {
         console.log(response);
         if (response.data.data) {
@@ -33,9 +31,7 @@ const ManageApplication = () => {
   }, []);
   const updateApplicationData = () => {
     axios
-      .get(
-        'https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurance-applications'
-      )
+      .get('/api/insurance-applications')
       .then((response) => {
         console.log(response);
         if (response.data.data) {

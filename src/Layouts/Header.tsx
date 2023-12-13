@@ -48,11 +48,9 @@ const Header = () => {
       console.log(key, ':', formData.get(key));
     }
     try {
-      const response = await axios.post(
-        'https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/login',
-        formData,
-        { withCredentials: true }
-      );
+      const response = await axios.post('/api/login', formData, {
+        withCredentials: true
+      });
       console.log(response);
       checkAdmin(response.data.userId);
       getUserInfo(response.data.userId);
@@ -73,9 +71,7 @@ const Header = () => {
   };
   const getUserInfo = (id: string) => {
     axios
-      .get(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/customers/${id}`
-      )
+      .get(`/api/customers/${id}`)
       .then((response) => {
         console.log('getUserAPI 요청', response.data.data);
         setUser(response.data.data);
@@ -92,9 +88,7 @@ const Header = () => {
   };
   const checkAdmin = async (id: string) => {
     try {
-      const adminResponse = await axios.get(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/customers/${id}/admin`
-      );
+      const adminResponse = await axios.get(`/api/customers/${id}/admin`);
       console.log(adminResponse.data.data);
       setIsAdmin(adminResponse.data.data); // 관리자 여부 설정
     } catch (error) {

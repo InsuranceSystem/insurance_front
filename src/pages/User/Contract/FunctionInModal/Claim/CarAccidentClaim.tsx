@@ -87,7 +87,7 @@ function Claim() {
 
     try {
       const response = await axios.post(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/compensation-claim/claim/car/${idNum}`,
+        `/api/car-accident/claim/${idNum}`,
         formData,
         {
           headers: {

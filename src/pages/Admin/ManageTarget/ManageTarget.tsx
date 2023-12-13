@@ -25,7 +25,7 @@ const ManageTarget = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/customers/contract-maintenance?targetType=${targetType}`
+          `/api/customers/contract-maintenance?targetType=${targetType}`
         );
         setUserData(response.data.data);
       } catch (error) {

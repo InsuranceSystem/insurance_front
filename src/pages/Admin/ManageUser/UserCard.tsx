@@ -26,7 +26,7 @@ const UserCard = ({
     const numId = Number(id);
     try {
       const response = await axios.patch(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/customers/${numId}/admin?setAdmin=${setAdmin}`
+        `/api/customers/${numId}/admin?setAdmin=${setAdmin}`
       );
       console.log('API 응답:', response.data);
       if (response.status === 200) {
@@ -44,7 +44,7 @@ const UserCard = ({
     const numId = Number(id);
     try {
       const response = await axios.patch(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/customers/${numId}/admin?setAdmin=${setAdmin}`
+        `/api/customers/${numId}/admin?setAdmin=${setAdmin}`
       );
       console.log('API 응답:', response.data);
       if (response.status === 200) {

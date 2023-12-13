@@ -62,9 +62,7 @@ const CustomerInfoModal: React.FC<RecruitmentModalProps> = ({
     console.log(id);
     console.log(selectedContractId);
     axios
-      .get(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurance-applications/${id}/detail`
-      )
+      .get(`/api/insurance-applications/${id}/detail`)
       .then((response) => {
         if (response.data.data) {
           setApplicationData(response.data.data);
@@ -85,15 +83,11 @@ const CustomerInfoModal: React.FC<RecruitmentModalProps> = ({
       const formData = new FormData();
       formData.append('reasonOfRejection', reason);
       axios
-        .post(
-          `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurance-applications/${id}/rejection`,
-          formData,
-          {
-            headers: {
-              'Content-Type': 'application/json'
-            }
+        .post(`/api/insurance-applications/${id}/rejection`, formData, {
+          headers: {
+            'Content-Type': 'application/json'
           }
-        )
+        })
         .then((response) => {
           if (response.status === 200) {
             alert('신청이 거절되었습니다.');
@@ -116,15 +110,11 @@ const CustomerInfoModal: React.FC<RecruitmentModalProps> = ({
       const formData = new FormData();
       formData.append('reasonOfApproval', reason);
       axios
-        .post(
-          `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurance-applications/${id}/approval`,
-          formData,
-          {
-            headers: {
-              'Content-Type': 'application/json'
-            }
+        .post(`/api/insurance-applications/${id}/approval`, formData, {
+          headers: {
+            'Content-Type': 'application/json'
           }
-        )
+        })
         .then((response) => {
           if (response.status === 200) {
             alert('신청이 승인되었습니다.');

@@ -35,7 +35,7 @@ const ApplicationCard = ({
   const handleFileClick = async () => {
     try {
       const response = await axios.get(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurance-applications/${insuranceApplicationID}/subscription`,
+        `/api/insurance-applications/${insuranceApplicationID}/subscription`,
         {
           responseType: 'arraybuffer' // responseType을 arraybuffer로 변경
         }

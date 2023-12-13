@@ -22,9 +22,7 @@ function Cancel() {
   useEffect(() => {
     const id = Number(idFromState);
     axios
-      .get(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/contracts/${id}/cancel-content`
-      )
+      .get(`/api/contracts/${id}/cancel-content`)
       .then((response) => {
         if (response.data.data) {
           setCancelContentData(response.data.data);
@@ -50,7 +48,7 @@ function Cancel() {
     }
     try {
       const response = await axios.post(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/contracts/${idNum}/cancel`,
+        `/api/contracts/${idNum}/cancel`,
         formData
       );
       console.log(response);

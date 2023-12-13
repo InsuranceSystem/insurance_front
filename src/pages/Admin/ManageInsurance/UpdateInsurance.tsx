@@ -73,7 +73,7 @@ function UpdateInsurance() {
     console.log(idFromState);
     try {
       const response = await axios.put(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurances/${idFromState}`,
+        `/api/insurances/${idFromState}`,
         applicationData
       );
 
@@ -97,9 +97,7 @@ function UpdateInsurance() {
   useEffect(() => {
     console.log(idFromState);
     axios
-      .get(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurances/${idFromState}`
-      )
+      .get(`/api/insurances/${idFromState}`)
       .then((response) => {
         console.log(response);
         if (response.data.data) {

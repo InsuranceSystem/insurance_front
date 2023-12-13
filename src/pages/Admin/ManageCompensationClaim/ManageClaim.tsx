@@ -18,9 +18,7 @@ const ContractList = () => {
   };
   useEffect(() => {
     axios
-      .get(
-        'https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/compensation-claim/all'
-      )
+      .get('/api/compensation-claim/all')
       .then((response) => {
         console.log(response);
         if (response.data.data) {

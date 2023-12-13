@@ -24,9 +24,7 @@ const ContractList = () => {
     console.log(id);
     if (selectedIsApplication) {
       axios
-        .get(
-          `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurance-applications/${id}/my`
-        )
+        .get(`/api/insurance-applications/${id}/my`)
         .then((response) => {
           console.log(response);
           if (response.data.data) {
@@ -46,9 +44,7 @@ const ContractList = () => {
   useEffect(() => {
     const id = localStorage.getItem('id');
     axios
-      .get(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/contracts/${id}`
-      )
+      .get(`/api/contracts/${id}`)
       .then((response) => {
         console.log(response);
         if (response.data.data) {
@@ -76,16 +72,6 @@ const ContractList = () => {
     setIsModalOpen(false);
     setSelectedContractId(null);
   };
-  // const filteredContractData: ContractProps[] = dummyContractData.filter(
-  //   (insurance) => {
-  //     const MaturityMatch =
-  //       !selectedIsMaturity || insurance.maturity === selectedIsMaturity;
-  //     const CancelMatch =
-  //       !selectedIsCancellation ||
-  //       insurance.cancellation === selectedIsCancellation;
-  //     return MaturityMatch && CancelMatch;
-  //   }
-  // );
   let filteredData: (ContractProps | ApplicationProps)[] = [];
 
   if (selectedIsApplication) {

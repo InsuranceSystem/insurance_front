@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import scrollbar from '../../../../../assets/scrollBar.svg';
 import { PaymentProps } from '../../../../../component/Props/Payment';
 import { useLocation } from 'react-router-dom';
 
@@ -17,9 +16,7 @@ function Pay() {
   useEffect(() => {
     console.log(idFromState);
     axios
-      .get(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/payments/${idFromState}`
-      )
+      .get(`/api/payments/${idFromState}`)
       .then((response) => {
         if (response.data.data) {
           setPayData(response.data.data);
@@ -34,9 +31,7 @@ function Pay() {
   const handlePayClick = (id: string) => {
     const idNum = Number(id);
     axios
-      .post(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/payments/${idNum}/update`
-      )
+      .post(`/api/payments/${idNum}/update`)
       .then((response) => {
         console.log(response);
         alert('납입 완료되었습니다.');

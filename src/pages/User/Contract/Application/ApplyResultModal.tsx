@@ -56,9 +56,7 @@ const ApplyResultModal: React.FC<RecruitmentModalProps> = ({
   useEffect(() => {
     const id = Number(selectedCompensationId);
     axios
-      .get(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurance-applications/${id}/result`
-      )
+      .get(`/api/insurance-applications/${id}/result`)
       .then((response) => {
         if (response.data.data) {
           setResultData(response.data.data);
@@ -70,21 +68,6 @@ const ApplyResultModal: React.FC<RecruitmentModalProps> = ({
         console.error('Error fetching group data:', error);
       });
   }, [selectedCompensationId]);
-  const ContractData: ContractProps = {
-    id: '10',
-    insuranceName: 'Accident Insurance',
-    insuranceType: 'Personal Accident',
-    insurancePeriod: '5 years',
-    premium: 200,
-    paymentCycle: 'Quarterly',
-    paymentPeriod: '1년',
-    maxCompensation: '200,000',
-    dateOfSubscription: '2022-08-08',
-    dateOfMaturity: '2027-08-08',
-    maturity: true,
-    resurrection: false,
-    cancellation: false
-  };
   if (!isOpen || !ResultData) {
     return null;
   }

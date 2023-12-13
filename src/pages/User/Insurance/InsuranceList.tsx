@@ -14,9 +14,7 @@ const InsuranceList = () => {
   const [selectedInsuranceId, setSelectedInsuranceId] = useState(null);
   useEffect(() => {
     axios
-      .get(
-        'https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurances/all'
-      )
+      .get('/api/insurances/all')
       .then((response) => {
         console.log(response);
         if (response.data.data) {

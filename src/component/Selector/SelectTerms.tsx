@@ -67,9 +67,7 @@ const RelatedTagsSelect = ({
 
   useEffect(() => {
     axios
-      .get(
-        'https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/terms'
-      )
+      .get('/api/terms')
       .then((response) => {
         console.log(response);
         if (response.data.data) {

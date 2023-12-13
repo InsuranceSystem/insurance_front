@@ -11,7 +11,6 @@ import {
 import scrollbar from '../../../assets/scrollBar.svg';
 import styled from 'styled-components';
 import axios from 'axios';
-import { SurveyProps } from '../../../component/Props/SurveyProps';
 import { CompensationClaimProps } from '../../../component/Props/CompensationClaimProps';
 type RecruitmentModalProps = {
   isOpen: boolean;
@@ -49,11 +48,8 @@ const DetailModal: React.FC<RecruitmentModalProps> = ({
   };
   useEffect(() => {
     axios
-      .get(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/compensation-claim/detail/${selectedCompensationId}`
-      )
+      .get(`/api/car-accident/detail/${selectedCompensationId}`)
       .then((response) => {
-        console.log(response);
         if (response.data.data) {
           setCompensationClaim(response.data.data);
         } else {
@@ -65,10 +61,22 @@ const DetailModal: React.FC<RecruitmentModalProps> = ({
       });
     if (CompensationClaim?.insuranceType === '자동차') {
       axios
-        .get(
-          `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/compensation-claim/detail/car/${selectedCompensationId}`
-        )
+        .get(`/api/car-accident/detail/${selectedCompensationId}`)
         .then((response) => {
+          if (response.data.data) {
+            setCompensationClaim(response.data.data);
+          } else {
+            console.error(response.data.data);
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching group data:', error);
+        });
+    } else {
+      axios
+        .get(`/api/compensation-claim/detail/${selectedCompensationId}`)
+        .then((response) => {
+          console.log(response);
           if (response.data.data) {
             setCompensationClaim(response.data.data);
           } else {
@@ -116,7 +124,7 @@ const DetailModal: React.FC<RecruitmentModalProps> = ({
                 </Description2>
                 <Description2>
                   <SubTitle>사고 일시</SubTitle>
-                  <Basic>{CompensationClaim?.dateTime?.substr(0, 10)}</Basic>
+                  <Basic>{CompensationClaim.dateTime}</Basic>
                 </Description2>
                 <Description2>
                   <SubTitle>사고 장소</SubTitle>

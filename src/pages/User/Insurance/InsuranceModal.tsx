@@ -54,9 +54,7 @@ const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
     if (!isOpen || !selectedInsuranceId) return;
 
     axios
-      .get(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurances/${selectedInsuranceId}`
-      )
+      .get(`/api/insurances/${selectedInsuranceId}`)
       .then((response) => {
         if (response.data.data) {
           setInsuranceData(response.data.data);
@@ -69,9 +67,7 @@ const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
       });
 
     axios
-      .get(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurances/${selectedInsuranceId}/terms`
-      )
+      .get(`/api/insurances/${selectedInsuranceId}/terms`)
       .then((response) => {
         if (response.data.data) {
           setTermsData(response.data.data);

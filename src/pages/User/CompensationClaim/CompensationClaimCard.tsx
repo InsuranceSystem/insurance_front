@@ -11,7 +11,6 @@ import {
 } from '../../../component/CardStyle/CardStyles';
 import { CompensationClaimProps } from '../../../component/Props/CompensationClaimProps';
 import styled from 'styled-components';
-import ClaimContentModal from './ClaimContentModal';
 import ClaimResultModal from './ClaimResultModal';
 import axios from 'axios';
 import DetailModal from '../../Admin/ManageCompensationClaim/DetailModal';
@@ -45,7 +44,7 @@ const CompensationClaimCard = ({
     const numId = Number(id);
     try {
       const response = await axios.get(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/compensation-claim/${numId}/document`,
+        `/api/compensation-claim/${numId}/document`,
         {
           responseType: 'arraybuffer' // responseType을 arraybuffer로 변경
         }
@@ -118,7 +117,7 @@ const CompensationClaimCard = ({
         onClose={closeDetailModal}
         selectedCompensationId={id}
       />
-      <ClaimContentModal
+      <DetailModal
         isOpen={isModalOpen}
         onClose={closeModal}
         selectedCompensationId={id}

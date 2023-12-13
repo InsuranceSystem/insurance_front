@@ -66,9 +66,7 @@ const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     axios
-      .get(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurances/${selectedInsuranceId}`
-      )
+      .get(`/api/insurances/${selectedInsuranceId}`)
       .then((response) => {
         if (response.data.data) {
           setInsuranceData(response.data.data);
@@ -83,9 +81,7 @@ const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     axios
-      .get(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurances/${selectedInsuranceId}/terms`
-      )
+      .get(`/api/insurances/${selectedInsuranceId}/terms`)
       .then((response) => {
         if (response.data.data) {
           setTermsData(response.data.data);
@@ -106,11 +102,8 @@ const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
     //window.location.href = `/edit?state=${insuranceData.id}`;
   };
   const handleOnSaleClick = () => {
-    const token = sessionStorage.getItem('accessToken');
     axios
-      .post(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurances/${selectedInsuranceId}/register`
-      )
+      .post(`/api/insurances/${selectedInsuranceId}/register`)
       .then((response) => {
         if (response.status === 200) {
           alert('등록되었습니다.');
@@ -124,9 +117,7 @@ const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
   };
   const handleStopClick = () => {
     axios
-      .delete(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurances/${selectedInsuranceId}`
-      )
+      .delete(`/api/insurances/${selectedInsuranceId}`)
       .then((response) => {
         if (response.status === 200) {
           alert('삭제되었습니다.');

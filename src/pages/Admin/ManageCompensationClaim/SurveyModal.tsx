@@ -73,15 +73,11 @@ const SurveyModal = ({
       console.log(key, ':', formData.get(key));
     }
     try {
-      const response = await axios.post(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/survey/${id}`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
+      const response = await axios.post(`/api/survey/${id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
         }
-      );
+      });
 
       console.log(response);
 

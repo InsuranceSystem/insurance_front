@@ -68,7 +68,7 @@ function DesignInsurance() {
     );
     try {
       const response = await axios.post(
-        'https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurances/design',
+        '/api/insurances/design',
         applicationData
       );
 

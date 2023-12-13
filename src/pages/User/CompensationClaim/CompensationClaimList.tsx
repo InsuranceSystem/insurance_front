@@ -16,9 +16,7 @@ const ContractList = () => {
     const id = localStorage.getItem('id');
     const NumId = Number(id);
     axios
-      .get(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/compensation-claim/${NumId}`
-      )
+      .get(`/api/compensation-claim/${NumId}`)
       .then((response) => {
         console.log(response);
         if (response.data.data) {

@@ -47,9 +47,7 @@ const ResultModal: React.FC<RecruitmentModalProps> = ({
   };
   useEffect(() => {
     axios
-      .get(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/survey/${selectedCompensationId}`
-      )
+      .get(`/api/survey/${selectedCompensationId}`)
       .then((response) => {
         if (response.data.data) {
           setSurvey(response.data.data);

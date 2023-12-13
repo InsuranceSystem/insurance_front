@@ -18,12 +18,7 @@ const ApplicationCard = ({
   insuranceApplicationID,
   insuranceName,
   createdAt,
-  insurancePeriod,
-  premium,
   paymentCycle,
-  maxCompensation,
-  subscriptionFilePath,
-  approval,
   state,
   reasonOfApproval
 }: ApplicationProps) => {
@@ -38,7 +33,7 @@ const ApplicationCard = ({
   const handleRetrieveFile = async () => {
     try {
       const response = await axios.get(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurance-applications/${insuranceApplicationID}/subscription`,
+        `/api/insurance-applications/${insuranceApplicationID}/subscription`,
         {
           responseType: 'arraybuffer' // responseType을 arraybuffer로 변경
         }

@@ -13,9 +13,7 @@ const ManageUser = () => {
   const [forceRefresh, setForceRefresh] = useState(false);
   useEffect(() => {
     axios
-      .get(
-        'https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/customers/all'
-      )
+      .get('/api/customers/all')
       .then((response) => {
         console.log(response);
         if (response.data.data) {

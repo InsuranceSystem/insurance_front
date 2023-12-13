@@ -187,7 +187,7 @@ function SignUp() {
         ) {
           axios
             .post(
-              'https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/customers/join',
+              '/api/customers/join',
               dto, // 직접 JSON 객체를 전달합니다.
               {
                 headers: {

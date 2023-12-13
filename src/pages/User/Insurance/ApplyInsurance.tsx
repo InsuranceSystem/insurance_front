@@ -38,7 +38,7 @@ function ApplyInsurance() {
     }
     try {
       const response = await axios.post(
-        `https://port-0-insurancesystem-euegqv2blnzmormf.sel5.cloudtype.app/insurance-applications/${idFromState}`,
+        `/api/insurance-applications/${idFromState}`,
         formData,
         {
           headers: {
