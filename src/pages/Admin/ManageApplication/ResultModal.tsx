@@ -57,9 +57,7 @@ const CustomerInfoModal: React.FC<RecruitmentModalProps> = ({
   useEffect(() => {
     const id = Number(selectedContractId);
     axios
-      .get(
-        `/api/insurance-applications/${id}/result`
-      )
+      .get(`/api/insurance-applications/${id}/result`)
       .then((response) => {
         if (response.data.data) {
           setResultData(response.data.data);
