@@ -12,6 +12,7 @@ import scrollbar from '../../../assets/scrollBar.svg';
 import styled from 'styled-components';
 import axios from 'axios';
 import { CompensationClaimProps } from '../../../component/Props/CompensationClaimProps';
+import { CarClaimProps } from '../../../component/Props/CarClaimProps';
 type RecruitmentModalProps = {
   isOpen: boolean;
   onClose: () => void;
@@ -41,52 +42,36 @@ const DetailModal: React.FC<RecruitmentModalProps> = ({
 }) => {
   const [CompensationClaim, setCompensationClaim] =
     useState<CompensationClaimProps | null>(null);
+  const [CarClaim, setCarClaim] = useState<CarClaimProps | null>(null);
   const handleOverlayClick = (event: { target: any; currentTarget: any }) => {
     if (event.target === event.currentTarget) {
       onClose();
     }
   };
   useEffect(() => {
-    axios
-      .get(`/api/car-accident/detail/${selectedCompensationId}`)
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `/api/compensation-claim/detail/${selectedCompensationId}`
+        );
         if (response.data.data) {
           setCompensationClaim(response.data.data);
-        } else {
-          console.error(response.data.data);
+          const carResponse = await axios.get(
+            `/api/compensation-claim/detail/car/${selectedCompensationId}`
+          );
+          console.log(carResponse);
+          if (carResponse.data.data) {
+            setCarClaim(carResponse.data.data);
+          } else {
+            console.error(carResponse.data.data);
+          }
         }
-      })
-      .catch((error) => {
-        console.error('Error fetching group data:', error);
-      });
-    if (CompensationClaim?.insuranceType === '자동차') {
-      axios
-        .get(`/api/car-accident/detail/${selectedCompensationId}`)
-        .then((response) => {
-          if (response.data.data) {
-            setCompensationClaim(response.data.data);
-          } else {
-            console.error(response.data.data);
-          }
-        })
-        .catch((error) => {
-          console.error('Error fetching group data:', error);
-        });
-    } else {
-      axios
-        .get(`/api/compensation-claim/detail/${selectedCompensationId}`)
-        .then((response) => {
-          console.log(response);
-          if (response.data.data) {
-            setCompensationClaim(response.data.data);
-          } else {
-            console.error(response.data.data);
-          }
-        })
-        .catch((error) => {
-          console.error('Error fetching group data:', error);
-        });
-    }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
   }, [selectedCompensationId]);
   if (!isOpen || !CompensationClaim) {
     return null;
@@ -120,31 +105,31 @@ const DetailModal: React.FC<RecruitmentModalProps> = ({
               <>
                 <Description2>
                   <SubTitle>사고유형</SubTitle>
-                  <Basic>{CompensationClaim.type}</Basic>
+                  <Basic>{CarClaim?.type}</Basic>
                 </Description2>
                 <Description2>
                   <SubTitle>사고 일시</SubTitle>
-                  <Basic>{CompensationClaim.dateTime}</Basic>
+                  <Basic>{CarClaim?.dateTime}</Basic>
                 </Description2>
                 <Description2>
                   <SubTitle>사고 장소</SubTitle>
-                  <Basic>{CompensationClaim.place}</Basic>
+                  <Basic>{CarClaim?.place}</Basic>
                 </Description2>
                 <Description2>
                   <SubTitle>차량 번호</SubTitle>
-                  <Basic>{CompensationClaim.carNumber}</Basic>
+                  <Basic>{CarClaim?.carNumber}</Basic>
                 </Description2>
                 <Description2>
                   <SubTitle>운전자 이름</SubTitle>
-                  <Basic>{CompensationClaim.driverName}</Basic>
+                  <Basic>{CarClaim?.driverName}</Basic>
                 </Description2>
                 <Description2>
                   <SubTitle>면허번호</SubTitle>
-                  <Basic>{CompensationClaim.licenseNumber}</Basic>
+                  <Basic>{CarClaim?.licenseNumber}</Basic>
                 </Description2>
                 <Description2>
                   <SubTitle>사고 상세</SubTitle>
-                  <Basic>{CompensationClaim.accidentDetail}</Basic>
+                  <Basic>{CarClaim?.accidentDetail}</Basic>
                 </Description2>
               </>
             ) : null}
