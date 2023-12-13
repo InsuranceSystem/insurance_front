@@ -478,8 +478,8 @@ const SelectedDate = styled(DatePicker)`
 `;
 const ButtonWrapper = styled.div`
   position: fixed;
-  top: 750px;
-  left: 1550px;
+  top: 550px;
+  left: 1250px;
   display: flex;
   flex-direction: row;
 `;
