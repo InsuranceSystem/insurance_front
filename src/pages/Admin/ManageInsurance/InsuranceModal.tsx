@@ -115,6 +115,9 @@ const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
         console.error('Error fetching group data:', error);
       });
   };
+  const handleClick = () => {
+    alert('금융감독원에 인가 요청이 완료되었습니다.');
+  };
   const handleStopClick = () => {
     axios
       .delete(`/api/insurances/${selectedInsuranceId}`)
@@ -173,9 +176,10 @@ const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
               <SpecialButton onClick={handleStopClick}>보험 삭제</SpecialButton>
             ) : (
               <Wrapper>
-                <AddButton onClick={handleOnSaleClick}>판매 등록</AddButton>
+                <AddButton3 onClick={handleOnSaleClick}>판매 등록</AddButton3>
                 <PayButton onClick={handleEditClick}>설계서 수정</PayButton>
                 <DeleteButton onClick={handleStopClick}>보험 삭제</DeleteButton>
+                <DeleteButton onClick={handleClick}>인가 요청</DeleteButton>
               </Wrapper>
             )}
           </ModalBody>
@@ -186,7 +190,30 @@ const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
 };
 
 export default RecruitmentModal;
+const AddButton3 = styled.button`
+  font-family: 'GmarketSansMedium';
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 500;
+  width: 104px;
+  height: 40px;
+  line-height: 41px;
+  border-radius: 15px;
+  background: rgba(0, 47, 213, 0.05);
+  color: #002fd5;
+  border: none;
+  margin-top: 43px;
+  margin-bottom: 40px;
+  margin-left: 170px;
+  &:hover {
+    background-color: #002fd5;
+    color: #ffffff;
+  }
 
+  &:active {
+    color: #002fd5;
+  }
+`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;

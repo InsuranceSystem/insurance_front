@@ -87,7 +87,7 @@ function Claim() {
 
     try {
       const response = await axios.post(
-        `/api/car-accident/claim/${idNum}`,
+        `/api/compensation-claim/claim/car/${idNum}`,
         formData,
         {
           headers: {

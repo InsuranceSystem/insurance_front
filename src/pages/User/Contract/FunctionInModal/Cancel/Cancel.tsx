@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import scrollbar from '../../../../../assets/scrollBar.svg';
-import { PaymentProps } from '../../../../../component/Props/Payment';
 import { Link, useLocation } from 'react-router-dom';
 import { CancelContentProps } from '../../../../../component/Props/CancelContentProps';
 import SelectBank from '../../../../../component/Selector/SelectBank';
@@ -53,9 +51,7 @@ function Cancel() {
       );
       console.log(response);
       if (response.status === 200) {
-        alert(
-          '해지가 완료되었습니다. 신청계좌로 입금까지 최대 7일이 소요됩니다.'
-        );
+        alert('해지가 완료되었습니다. 입금까지는 최대 7일이 소요됩니다.');
       } else {
         alert('해지에 실패했습니다.');
       }

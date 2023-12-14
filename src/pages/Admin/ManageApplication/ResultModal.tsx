@@ -5,19 +5,12 @@ import {
   ModalContent,
   Title,
   SubTitle,
-  Description,
-  Content,
   Basic,
-  Description2,
-  PayButton,
-  ClaimButton,
-  SubTitle2,
-  BorderLine
+  Description2
 } from '../../../component/ModalStyle/ModalStyle';
 import scrollbar from '../../../assets/scrollBar.svg';
 import styled from 'styled-components';
 import axios from 'axios';
-import { ContractProps } from '../../../component/Props/ContractProps';
 import { ApplicationResultProps } from '../../../component/Props/ApplicationResultProps';
 type RecruitmentModalProps = {
   isOpen: boolean;
@@ -110,8 +103,3 @@ const CustomerInfoModal: React.FC<RecruitmentModalProps> = ({
 };
 
 export default CustomerInfoModal;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-`;

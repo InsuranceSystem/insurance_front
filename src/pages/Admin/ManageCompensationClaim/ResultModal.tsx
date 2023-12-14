@@ -6,7 +6,8 @@ import {
   Title,
   SubTitle,
   Basic,
-  Description2
+  Description2,
+  SupportButton
 } from '../../../component/ModalStyle/ModalStyle';
 import scrollbar from '../../../assets/scrollBar.svg';
 import styled from 'styled-components';
@@ -40,6 +41,7 @@ const ResultModal: React.FC<RecruitmentModalProps> = ({
   selectedCompensationId
 }) => {
   const [Survey, setSurvey] = useState<SurveyProps | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const handleOverlayClick = (event: { target: any; currentTarget: any }) => {
     if (event.target === event.currentTarget) {
       onClose();
@@ -59,9 +61,25 @@ const ResultModal: React.FC<RecruitmentModalProps> = ({
         console.error('Error fetching group data:', error);
       });
   }, [selectedCompensationId]);
+  useEffect(() => {
+    const id = localStorage.getItem('id');
+    axios
+      .get(`/api/customers/${id}/admin`)
+      .then((response) => {
+        if (response) {
+          setIsAdmin(response.data.data);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching group data:', error);
+      });
+  }, [selectedCompensationId]);
   if (!isOpen || !Survey) {
     return null;
   }
+  const handleClick = () => {
+    alert('보험금 지급 신청이 완료되었습니다.');
+  };
   return (
     <ModalOverlay onClick={handleOverlayClick}>
       <ModalWrapper>
@@ -91,6 +109,7 @@ const ResultModal: React.FC<RecruitmentModalProps> = ({
                 <Basic>{Survey.responsibilityReason}</Basic>
               </Description2>
             ) : null}
+            <SupportButton onClick={handleClick}>보험금 지급</SupportButton>
           </ModalBody>
         </ModalContent>
       </ModalWrapper>

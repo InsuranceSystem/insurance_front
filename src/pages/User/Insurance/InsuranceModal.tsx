@@ -17,6 +17,7 @@ import axios from 'axios';
 import { InsuranceProps } from '../../../component/Props/InsuranceProps';
 import { TermsProps } from '../../../component/Props/TermsProps';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 type RecruitmentModalProps = {
   isOpen: boolean;
   onClose: () => void;
@@ -89,7 +90,15 @@ const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
     }
   };
   const handleSupportClick = () => {
-    navigate('/user/application', { state: { id: insuranceData.id } });
+    if (!localStorage.getItem('id')) {
+      Swal.fire({
+        text: '로그인이 필요합니다.',
+        icon: 'error',
+        confirmButtonText: '닫기'
+      });
+    } else {
+      navigate('/user/application', { state: { id: insuranceData.id } });
+    }
   };
   return (
     <ModalOverlay onClick={handleOverlayClick}>

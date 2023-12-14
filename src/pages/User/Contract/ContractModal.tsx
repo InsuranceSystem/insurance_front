@@ -73,6 +73,9 @@ const ContractModal: React.FC<RecruitmentModalProps> = ({
   const handlePayClick = () => {
     navigate('/user/Pay', { state: { id: ContractData.id } });
   };
+  const handleClick = () => {
+    alert('해지 환급금 지급이 요청되었습니다. 입금까지 최대 7일이 소요됩니다.');
+  };
   const handleClaimClick = () => {
     if (ContractData.insuranceType === '자동차') {
       navigate('/user/CarAccidentClaim', { state: { id: ContractData.id } });

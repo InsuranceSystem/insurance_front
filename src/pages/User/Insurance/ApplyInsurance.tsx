@@ -66,10 +66,10 @@ function ApplyInsurance() {
     }
   };
   const handleFileDown = () => {
-    const fileUrl = process.env.PUBLIC_URL + '/file.pdf'; // 파일의 정확한 경로로 수정하세요
+    const fileUrl = process.env.PUBLIC_URL + '/file.pdf';
     const link = document.createElement('a');
     link.href = fileUrl;
-    link.setAttribute('download', '청약서.pdf'); // 다운로드할 파일명으로 수정하세요
+    link.setAttribute('download', '청약서.pdf');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

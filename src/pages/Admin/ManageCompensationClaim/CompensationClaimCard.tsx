@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   CardContainer,
   CardInfo,
-  Details,
   FileButton,
   Wrapper,
   UpWrapper,
@@ -31,9 +30,12 @@ const CompensationClaimCard = ({
   const handleFileClick = async () => {
     const numId = Number(id);
     try {
-      const response = await axios.get(`/api/${numId}/document`, {
-        responseType: 'arraybuffer' // responseType을 arraybuffer로 변경
-      });
+      const response = await axios.get(
+        `/api/compensation-claim/${numId}/document`,
+        {
+          responseType: 'arraybuffer' // responseType을 arraybuffer로 변경
+        }
+      );
 
       const fileBlob = new Blob([response.data], { type: 'application/pdf' }); // PDF MIME 타입으로 설정
 

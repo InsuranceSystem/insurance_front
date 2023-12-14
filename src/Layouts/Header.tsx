@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
+import { animateScroll as scroll } from 'react-scroll';
 import LoginModal from '../pages/Login/LoginModal';
 import Modal from '../component/ModalStyle/Modal';
 import axios from 'axios';
 import UserProps from '../component/Props/UserProps';
 import Swal from 'sweetalert2';
+import llogo from '../assets/logo.svg';
 const Header = () => {
   const scrollToTop = () => {
     scroll.scrollToTop();
@@ -28,12 +29,10 @@ const Header = () => {
     setPassword(e.target.value);
   };
   const logout = () => {
-    // 세션 스토리지에서 로그인 정보 삭제
     document.cookie = 'JSESSIONID=; Max-Age=0; path=/';
-    // 유저 정보 초기화
     setUser(null);
-    // 관리자 여부 초기화
     setIsAdmin(false);
+    setIsAdminMode(false);
     localStorage.removeItem('id');
     navigate('/user/retrieve');
   };
@@ -124,7 +123,20 @@ const Header = () => {
     setIsAdminMode(false);
     navigate('/user/retrieve');
   };
-  const handleContractManagement = () => {
+  const checkAutoLogin = () => {
+    const userId = localStorage.getItem('id');
+    if (userId) {
+      getUserInfo(userId);
+      checkAdmin(userId);
+    }
+  };
+  useEffect(() => {
+    checkAutoLogin();
+  }, []);
+  const handleContractManagement = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    e.preventDefault();
     if (!localStorage.getItem('id')) {
       Swal.fire({
         text: '로그인이 필요합니다.',
@@ -135,14 +147,10 @@ const Header = () => {
       navigate('/user/management');
     }
   };
-  const checkAutoLogin = () => {
-    const userId = localStorage.getItem('id');
-    if (userId) {
-      getUserInfo(userId);
-      checkAdmin(userId);
-    }
-  };
-  const handleCompensationClaim = () => {
+  const handleCompensationManagement = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    e.preventDefault();
     if (!localStorage.getItem('id')) {
       Swal.fire({
         text: '로그인이 필요합니다.',
@@ -153,9 +161,6 @@ const Header = () => {
       navigate('/user/CompensationClaim');
     }
   };
-  useEffect(() => {
-    checkAutoLogin();
-  }, []);
   return (
     <HeaderWrapper>
       <HeaderUl>
@@ -164,7 +169,7 @@ const Header = () => {
             <HeaderLeft2>
               <li>
                 <NavLink to='/user/retrieve' onClick={scrollToTop}>
-                  <Title>에이쁠 보험</Title>
+                  <StyledImg src={llogo} alt='Logo' className='logo-image' />
                 </NavLink>
               </li>
             </HeaderLeft2>
@@ -174,7 +179,7 @@ const Header = () => {
             <HeaderLeft>
               <li>
                 <NavLink to='/user/retrieve' onClick={scrollToTop}>
-                  <Title>에이쁠 보험</Title>
+                  <StyledImg src={llogo} alt='Logo' className='logo-image' />
                 </NavLink>
               </li>
             </HeaderLeft>
@@ -256,14 +261,13 @@ const Header = () => {
                   className={({ isActive }) =>
                     'nav-link' + (isActive ? 'a' : '')
                   }
-                  onClick={handleCompensationClaim}
+                  onClick={handleCompensationManagement}
                   to='/user/CompensationClaim'>
                   <ScrollIndex>보상 청구 조회</ScrollIndex>
                 </NavLink>
               </li>
             </>
           )}
-
           {user ? (
             <HeaderUser2>
               <Wrapper>
@@ -325,6 +329,11 @@ const Header = () => {
 };
 
 export default Header;
+const StyledImg = styled.img`
+  width: 100.2px;
+  height: 48px;
+  margin-right: 30px;
+`;
 const HeaderUser = styled.div`
   display: flex;
   align-items: center;
@@ -375,7 +384,7 @@ const HeaderUser = styled.div`
 const HeaderUser2 = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 70px;
+  margin-left: 100px;
   .login {
     margin-right: 10px;
     background: rgba(0, 47, 213, 0.05);
@@ -430,7 +439,7 @@ const HeaderWrapper = styled.div`
     text-decoration: none;
   }
   width: 100%;
-  height: 3.25rem;
+  height: 75px;
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(3.5px);
   display: flex;
@@ -445,7 +454,6 @@ const HeaderUl = styled.ul`
   display: flex;
   align-items: center;
   list-style: none;
-  margin-top: 30px;
 `;
 
 const HeaderLeft = styled.div`
@@ -499,26 +507,11 @@ const ScrollIndex = styled.div`
     margin-right: 1.57rem;
   }
 `;
-const Title = styled.div`
-  margin-left: 150px;
-  display: flex;
-  align-items: center;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  button:first-child {
-    margin-right: 1.57rem;
-  }
-  img {
-    margin-right: 1.57rem;
-  }
-`;
 const BorderLine = styled.hr`
   stroke-width: 2px;
   width: 1250px;
   color: #fff;
   border: none;
   border-top: 1px solid #dbdbdf;
-  margin-top: 15px;
   margin-left: 10 auto;
 `;

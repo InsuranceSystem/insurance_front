@@ -14,13 +14,8 @@ import {
 import scrollbar from '../../../assets/scrollBar.svg';
 import styled from 'styled-components';
 import axios from 'axios';
-import { InsuranceProps } from '../../../component/Props/InsuranceProps';
-import { TermsProps } from '../../../component/Props/TermsProps';
-import { SurveyProps } from '../../../component/Props/SurveyProps';
-import SelectDistribution from '../../../component/Selector/SelectDistribution';
 import SelectResponsibility from '../../../component/Selector/SelectResponsibility';
 import StyledFileInput from '../../../component/Selector/StyledFileInput';
-import { CompensationClaimProps } from '../../../component/Props/CompensationClaimProps';
 type RecruitmentModalProps = {
   isOpen: boolean;
   onClose: () => void;
@@ -97,9 +92,6 @@ const SurveyModal = ({
   if (!isOpen) {
     return null;
   }
-  const handleSubmitClick = () => {
-    const token = localStorage.getItem('accessToken');
-  };
   const handleResponsibilityChange = (Age: boolean | false) => {
     if (Age !== null) {
       setResponsibility(Age);
@@ -160,15 +152,17 @@ const SurveyModal = ({
                 value={responsibility}
                 onChange={handleResponsibilityChange}></SelectResponsibility>
             </Description3>
-            <Description>
-              <SubTitle>고객 책임 사유</SubTitle>
-              <BorderLine></BorderLine>
-              <ActivityContent
-                placeholder={'면/부책 사유 입력 (최대 200자)'}
-                value={responsibilityReason}
-                onChange={(e) => setResponsibilityReason(e.target.value)}
-              />
-            </Description>
+            {responsibility ? (
+              <Description>
+                <SubTitle>고객 책임 사유</SubTitle>
+                <BorderLine></BorderLine>
+                <ActivityContent
+                  placeholder={'면/부책 사유 입력 (최대 200자)'}
+                  value={responsibilityReason}
+                  onChange={(e) => setResponsibilityReason(e.target.value)}
+                />
+              </Description>
+            ) : null}
             <Wrapper>
               <SupportButton onClick={handleSubmit}>제출하기</SupportButton>
             </Wrapper>
