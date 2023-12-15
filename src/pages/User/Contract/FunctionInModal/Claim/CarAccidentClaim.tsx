@@ -137,7 +137,7 @@ function Claim() {
             type='text'
             value={number}
             onChange={(e) => setNumber(e.target.value)}
-            placeholder={'예시 - 전화번호'}
+            placeholder={'하이픈 없이 입력 (예시 - 01012345678)'}
           />
           <BorderLine2></BorderLine2>
           <SmallTitle>
@@ -218,7 +218,7 @@ function Claim() {
             type='text'
             value={carNum}
             onChange={(e) => setCarNum(e.target.value)}
-            placeholder={'숫자만 입력해주세요'}
+            placeholder={'12가 1234'}
           />
           <BorderLine2></BorderLine2>
           <SmallTitle>
@@ -229,7 +229,7 @@ function Claim() {
             type='text'
             value={driverName}
             onChange={(e) => setDriverName(e.target.value)}
-            placeholder={'숫자만 입력해주세요'}
+            placeholder={'예시 - 홍길동'}
           />
           <BorderLine2></BorderLine2>
           <SmallTitle>
@@ -247,7 +247,7 @@ function Claim() {
             사고 내용<BasicInfoAsterisk>*</BasicInfoAsterisk>
           </SmallTitle>
           <ActivityContent
-            placeholder={'주의사항 (최대 500자)'}
+            placeholder={'사고내용 (최대 500자)'}
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />

@@ -96,7 +96,7 @@ function Claim() {
             type='text'
             value={number}
             onChange={(e) => setNumber(e.target.value)}
-            placeholder={'예시 - 전화번호'}
+            placeholder={'하이픈 없이 입력 (예시 - 01012345678)'}
           />
           <BorderLine2></BorderLine2>
           <SmallTitle>

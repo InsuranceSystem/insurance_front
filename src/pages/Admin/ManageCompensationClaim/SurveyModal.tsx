@@ -115,7 +115,7 @@ const SurveyModal = ({
                 type='text'
                 value={managerName}
                 onChange={(e) => setManagerName(e.target.value)}
-                placeholder={'예시 - 자동차보험A'}
+                placeholder={'예시 - 홍길동'}
               />
               <BorderLine></BorderLine>
             </Description3>

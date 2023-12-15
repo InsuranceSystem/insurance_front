@@ -98,7 +98,7 @@ function Cancel() {
             type='text'
             value={number}
             onChange={(e) => setNumber(e.target.value)}
-            placeholder={'예시 - 전화번호'}
+            placeholder={'하이픈없이 입력해주세요 (예시 - 01012345678)'}
           />
           <BorderLine2></BorderLine2>
           <SmallTitle>
